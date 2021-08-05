@@ -38,7 +38,7 @@ class User(db.Model):
 
         return "<User user_id={} fname={} lname={}>".format(self.user_id, self.fname, self.lname)
 
-
+    
 class Recipe(db.Model):
     """Saved recipe on website (from Spoonacular API)."""
 
@@ -90,6 +90,9 @@ class PlanRecipe(db.Model):
         """Provide helpful representation when printed."""
 
         return "<Assoc assoc_id={} user_id={} recipe_id={}>".format(self.assoc_id, self.user_id, self.recipe_id)
+
+
+
 
 
 ############################## Helper Functions ###############################
@@ -166,7 +169,7 @@ def example_data():
     db.session.commit()
 
 
-def connect_to_db(app, db_uri='postgresql://postgres:harvest1@localhost/harvest'):
+def connect_to_db(app, db_uri='postgresql://postgres:harvest1@localhost/postgres'):
     
 
     """Connect the database to the Flask app."""

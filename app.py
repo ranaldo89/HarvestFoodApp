@@ -39,67 +39,67 @@ mock_results = [{
         "readyInMinutes": 20,
         "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
     }, {
+        "id": 212401,
+        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
+        "image": "https://spoonacular.com/recipeImages/Butternut-squash-salad-212401.jpg?size=200",
+        "title": "Butternut squash salad",
+        "readyInMinutes": 65,
+        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
+    }, {
         "id": 479101,
         "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
+        "image": "https://spoonacular.com/recipeImages/california-quinoa-avocado-salad-958131.jpg?size=200",
+        "title": "California quinoa & avocado salad",
+        "readyInMinutes": 40,
+        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
+    }, {
+        "id": 479101,
+        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
+        "image": "https://spoonacular.com/recipeImages/spinach-avocado-and-marinated-tofu-salad-905643.jpg?size=200",
         "title": "On the Job: Pan Roasted Cauliflower From Food52",
+        "readyInMinutes": 125,
+        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
+    }, {
+        "id": 479101,
+        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
+        "image": "https://spoonacular.com/recipeImages/southwestern-butternut-squash-salad-1141526.jpg?size=200",
+        "title": "Southwestern Butternut Squash Salad",
+        "readyInMinutes": 50,
+        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
+    }, {
+        "id": 479101,
+        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
+        "image": "https://spoonacular.com/recipeImages/grilled_pork_tenderloin_with_chimichurri_and_summer_veggies-82069.jpg?size=200",
+        "title": "Grill Pork Tenderloin With Chimichurri and Summer Veggies",
         "readyInMinutes": 20,
         "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
     }, {
         "id": 479101,
         "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
+        "image": "https://spoonacular.com/recipeImages/easy-peanut-noodles-1575205.jpg?size=200",
+        "title": "Easy Peanut Noodles",
+        "readyInMinutes": 35,
+        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
+    }, {
+        "id": 479101,
+        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
+        "image": "https://spoonacular.com/recipeImages/gluten-free-baked-feta-pasta-the-tiktok-sensation-1622281.jpg?size=200",
+        "title": "Gluten Free Baked Feta Pasta – The TikTok Sensation",
         "readyInMinutes": 20,
         "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
     }, {
         "id": 479101,
         "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
+        "image": "https://spoonacular.com/recipeImages/Herb-Crusted-Beef-Tenderloin-175785.jpg",
+        "title": "Herb Crusted Beef Tenderloin",
         "readyInMinutes": 20,
         "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
     }, {
         "id": 479101,
         "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
-        "readyInMinutes": 20,
-        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
-    }, {
-        "id": 479101,
-        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
-        "readyInMinutes": 20,
-        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
-    }, {
-        "id": 479101,
-        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
-        "readyInMinutes": 20,
-        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
-    }, {
-        "id": 479101,
-        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
-        "readyInMinutes": 20,
-        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
-    }, {
-        "id": 479101,
-        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
-        "readyInMinutes": 20,
-        "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
-    }, {
-        "id": 479101,
-        "url": "http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-        "image": "https://spoonacular.com/recipeImages/479101-556x370.jpg",
-        "title": "On the Job: Pan Roasted Cauliflower From Food52",
-        "readyInMinutes": 20,
+        "image": "https://spoonacular.com/recipeImages/Lamb-Shank-Stew-with-Root-Vegetables-247018.jpg?size=200",
+        "title": "Lamb Shank Stew with Root Vegetables",
+        "readyInMinutes": 60,
         "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
     }
     ]
@@ -458,6 +458,11 @@ def protein_data():
             }
 
     return jsonify(protein_dict)
+
+
+@app.route("/bmicalculator")
+def bmicalculator():
+    return render_template("bmicalculator.html");
 
 
 def make_recipe_search_request(cuisine, exclude, intolerant):
