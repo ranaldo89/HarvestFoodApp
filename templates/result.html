@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<h1> Meals </h1>
+<div class="properties-container">
+    {% for newmeal in meals %}
+    <div class="card" id="p2-card">
+        <img src="{{ url_for('get_image',filename=newmeal.photo)}}" class="card-img-top" />
+        <div class="p2">
+            <h5 class="card-title">{{newmeal.foodName}}</h5>
+            <div class="bullet" id="bullet2">
+                {{newmeal.description}}
+            </div>
+            <div class="price">{{newmeal.calories}}</div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %} {% block scripts %}
+<script src="/static/helper.js"></script>
+{% endblock %}

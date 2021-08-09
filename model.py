@@ -1,6 +1,11 @@
 """Models and database functions"""
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from flask_wtf import FlaskForm
+from wtforms import StringField,TextAreaField,SelectField,IntegerField, FloatField
+from wtforms.validators import DataRequired, Email
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+
 
 # connection to the PostgreSQL database
 db = SQLAlchemy()
@@ -38,7 +43,38 @@ class User(db.Model):
 
         return "<User user_id={} fname={} lname={}>".format(self.user_id, self.fname, self.lname)
 
-    
+
+
+class Meals(db.Model):
+    __tablename__ = 'meals'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(150))
+    prepTime = db.Column(db.Integer)
+    fat=db.Column(db.Integer)
+    carbohydrates = db.Column(db.Integer)
+    protein = db.Column(db.Float(10))
+    calories= db.Column(db.Float(50))
+    photo = db.Column(db.String(250))
+    def __init__(self, title, prepTime, fat,carbohydrates,protein,calories,photo):
+        self.title = title
+        self.prepTime = prepTime
+        self.fat = fat
+        self.carbohydrates=carbohydrates
+        self.protein=protein
+        self.calories=calories
+        self.photo=photo
+
+    def get_id(self):
+        try:
+            return unicode(self.id)  # python 2 support
+        except NameError:
+            return str(self.id)  # python 3 support
+
+    def __repr__(self):
+        return "<Recipe id={} foodName={} description={}>".format(self.id, self.title, self.prepTime )
+
+
+
 class Recipe(db.Model):
     """Saved recipe on website (from Spoonacular API)."""
 
@@ -60,6 +96,7 @@ class Recipe(db.Model):
         return "<Recipe recipe_id={} title={} num_saved={}>".format(self.recipe_id, self.title, self.num_saved)
 
 
+
 class Plan(db.Model):
     """Saved meal plans on website."""
 
@@ -68,6 +105,7 @@ class Plan(db.Model):
     plan_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), index=True)
     start = db.Column(db.Date, nullable=False)
+    order_status = db.Column(db.String(100), nullable=False)
 
     recipes = db.relationship("Recipe", secondary="assoc", backref="plans")
 
@@ -97,79 +135,7 @@ class PlanRecipe(db.Model):
 
 ############################## Helper Functions ###############################
 
-def example_data():
-    user = User(fname="Bilbo",
-                lname="Baggins",
-                email="bilbo@gmail.com",
-                pw="bilbo",
-                bday="2000-01-01 00:00:00",
-                gender="m"
-                )
-    plan = Plan(user_id=1,
-                start=datetime.date(2015, 5, 23))
-    recipe1 = Recipe(recipe_id=479101,
-                    num_saved=1,
-                    title="On the Job: Pan Roasted Cauliflower From Food52",
-                    url="http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-                    image="https://spoonacular.com/recipeImages/479101-556x370.jpg",
-                    prep_time=20,
-                    fat=40.32,
-                    carbohydrates=8.78,
-                    protein=14.42
-                    )
-    recipe2 = Recipe(recipe_id=479102,
-                    num_saved=1,
-                    title="On the Job: Pan Roasted Cauliflower From Food52",
-                    url="http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-                    image="https://spoonacular.com/recipeImages/479101-556x370.jpg",
-                    prep_time=20,
-                    fat=40.32,
-                    carbohydrates=8.78,
-                    protein=14.42
-                    )
-    recipe3 = Recipe(recipe_id=479103,
-                    num_saved=1,
-                    title="On the Job: Pan Roasted Cauliflower From Food52",
-                    url="http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-                    image="https://spoonacular.com/recipeImages/479101-556x370.jpg",
-                    prep_time=20,
-                    fat=40.32,
-                    carbohydrates=8.78,
-                    protein=14.42
-                    )
-    recipe4 = Recipe(recipe_id=479104,
-                    num_saved=1,
-                    title="On the Job: Pan Roasted Cauliflower From Food52",
-                    url="http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-                    image="https://spoonacular.com/recipeImages/479101-556x370.jpg",
-                    prep_time=20,
-                    fat=40.32,
-                    carbohydrates=8.78,
-                    protein=14.42
-                    )
-    recipe5 = Recipe(recipe_id=479105,
-                    num_saved=1,
-                    title="On the Job: Pan Roasted Cauliflower From Food52",
-                    url="http://feedmephoebe.com/2013/11/job-food52s-pan-roasted-cauliflower/",
-                    image="https://spoonacular.com/recipeImages/479101-556x370.jpg",
-                    prep_time=20,
-                    fat=40.32,
-                    carbohydrates=8.78,
-                    protein=14.42
-                    )                                          
-
-
-    db.session.add(user)
-    db.session.add(plan)
-    db.session.add(recipe1)
-    db.session.add(recipe2)
-    db.session.add(recipe3)
-    db.session.add(recipe4)
-    db.session.add(recipe5)
-    db.session.commit()
-
-
-def connect_to_db(app, db_uri='postgresql://postgres:harvest1@localhost/postgres'):
+def connect_to_db(app, db_uri='postgresql://postgres:00000@localhost/harvest'):
     
 
     """Connect the database to the Flask app."""
@@ -186,3 +152,5 @@ if __name__ == "__main__":
     connect_to_db(app)
     db.create_all()
     print ("Connected to DB")
+
+

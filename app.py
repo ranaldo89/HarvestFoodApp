@@ -1,12 +1,16 @@
 from flask import Flask
-from flask import Flask, render_template, request, flash, redirect, session, jsonify
+
+from flask import Flask, render_template, request, flash, redirect, session, jsonify, url_for,send_from_directory
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Recipe, Plan, PlanRecipe
+from forms import NewMeals
+from model import Meals
 from sqlalchemy import desc
 import requests
 import random
-import ast
+import ast,os
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search"
 
@@ -103,6 +107,13 @@ mock_results = [{
         "nutrition": [{0: "blah"}, {"title": "Fat", "percentOfDailyNeeds": 40.32}, {0: "blah"}, {"title": "Carbohydrates", "percentOfDailyNeeds": 8.78}, {0: "blah"}, {0: "blah"}, {0: "blah"}, {"title": "Protein", "percentOfDailyNeeds": 14.42}]
     }
     ]
+
+define_status = {
+    "created": 1,
+    "processed": 35,
+    "dispatched":65,
+    "delivered":100
+}
 
 app = Flask(__name__)
 app.secret_key = "A big secret"
@@ -211,6 +222,10 @@ def check_for_plans():
         return render_template("no_meals.html", fname=user.fname)
 
 @app.route("/mymeals-<int:plan_id>")
+
+#  SHOWS THE RECIEPES SELECTED
+
+
 def show_saved_recipes(plan_id):
     """Displays a meal plan."""
 
@@ -228,6 +243,8 @@ def show_saved_recipes(plan_id):
 
 @app.route('/results')
 def process_search():
+
+    # SHOWS ALL RECIEPES TO BE SELECTED
     """Process search form and display results."""
 
     user = User.query.get(session["user_id"])
@@ -238,7 +255,8 @@ def process_search():
     start = request.args.get("start")
     # session['start'] = start
 
-########## UNCOMMENT THIS SECTION FOR ACTUAL API REQUESTS ##########
+    meals = Meals.query.all()
+    
 
     # request.args is a multidict, so need to use .getlist (not .get)
     cuisines = request.args.getlist("cuisine")
@@ -250,38 +268,6 @@ def process_search():
     for word in intolerant:
         intolerant_str += word + ","
 
-    # number = 12 / len(cuisines)    # to accomodate for 1-3 cuisine inputs
-    raw_results = []    # a list of recipe dicts with all cuisines
-
-    #for cuisine in cuisines:
-        #response = make_recipe_search_request(cuisine, exclude, intolerant_str)
-        #print ("THIS IS THE RESPONSE: {}".format(response))
-        #raw_results.extend(response)
-
-    #results, remainder = choose_rand_results(raw_results)
-    #print ("THIS IS RESULTS: {}".format(results))
-    #print ("THIS IS REMAINDER: {}".format(remainder))
-
-    # if remainder == 0, do not show MORE button
-
-    #ids = ""
-    #for result in results:
-        #recipe_id = str(result[0])
-        #ids += recipe_id + ","
-
-    #nutrition = make_nutrition_info_request(ids)
-
-    #for i in range(len(mock_results)):
-        # nutrition.body is a list of info for each result
-        #mock_results[i]["nutrition"] = nutrition.content[i]["nutrition"]["nutrients"]    # this is a list of dicts
-        #mock_results[i]["url"] = nutrition.content[i]["sourceUrl"]
-        #if "image" in nutrition.content[i]:
-            #mock_results[i]["image"] = nutrition.content[i]["image"]
-        #else:
-            #mock_results[i]["image"] = "/static/tomato.jpg"
-
-
-
 
 
     return render_template("results.html",
@@ -289,18 +275,23 @@ def process_search():
                            cuisines=cuisines,
                            exclude=exclude,
                            intolerant=intolerant,
+                           meals=meals,
                            results=mock_results,
                            fname=user.fname)
 
 
 @app.route("/save-recipes", methods=['POST'])
+  
+#    SAVE RECIEPES FROM THE API TO THE DATABASE
+
 def save_recipe():
     """Stores a saved recipe into database."""
 
-    # make a new record in the plan table
+       # make a new record in the plan table
     start = request.form.get("start")
     plan = Plan(start=start,
                 user_id=session['user_id'],
+                order_status="created"
                 )
     db.session.add(plan)
     db.session.commit()
@@ -331,7 +322,12 @@ def save_recipe():
 
     return redirect("/mymeals")
 
+
+
 @app.route("/fat-data.json")
+
+    # SHOWS FAT CALC FOR EACH RECIEPE
+
 def fat_data():
     """Return percentage of fat for the five saved recipes."""
 
@@ -376,6 +372,8 @@ def fat_data():
 
 @app.route("/carbs-data.json")
 def carbs_data():
+
+     # SHOWS CARBS CALC FOR EACH RECIEPE
     """Return percentage of carbs for the five saved recipes."""
 
     user = User.query.get(session["user_id"])
@@ -419,12 +417,22 @@ def carbs_data():
 
 @app.route("/protein-data.json")
 def protein_data():
+
+
+
+     ############SHOWS PROTEIN CALC FOR EACH RECIEPE#############################
+
+
     """Return percentage of protein for the five saved recipes."""
 
     user = User.query.get(session["user_id"])
     # plan = Plan.query.filter_by(user_id=user.user_id).order_by(desc(Plan.plan_id)).first()
     plan = Plan.query.get(session["plan_id"])
     recipes = plan.recipes
+    
+
+
+
 
     color = "#4A7E13"
     protein = 0
@@ -463,6 +471,72 @@ def protein_data():
 @app.route("/bmicalculator")
 def bmicalculator():
     return render_template("bmicalculator.html");
+
+
+
+@app.route('/newmeal', methods=['POST', 'GET'])
+def newmeal():
+
+
+    #####################COLLECTS MEALS FROM USER AND DISPLAYS THEM ####################
+
+
+
+    """For displaying the form to add a new meal"""
+    form = NewMeals()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            UPLOAD_FOLDER = './static/'
+            image = form.image.data
+            filename = secure_filename(image.filename)
+            
+            image.save(os.path.join(UPLOAD_FOLDER, filename))
+            newmeal = Meals(title=form.title.data, prepTime=form.prepTime.data, fat=form.fat.data,
+                            carbohydrates=form.carbohydrates.data, protein=form.protein.data,
+                            calories=form.calories.data, photo=filename)
+            db.session.add(newmeal)
+            db.session.commit()
+            flash('Meal Saved', 'success')
+            return redirect('/results')
+        else:
+            flash_errors(form)
+    return render_template('meals.html', form=form)
+
+
+@app.route('/meals')
+def meals():
+
+    ###########################SHOWS MEALS ADDED#############################
+
+
+    return render_template('results.html', meals=Meals.query.all())
+
+
+@app.route('/deliveries')
+def track_deliveries():
+    user = User.query.get(session["user_id"])
+
+    plans = Plan.query.filter_by(user_id=user.user_id).all()
+
+
+    
+    return render_template('delivery.html',fname=user.fname, plans=plans, status=define_status)
+
+@app.route('/meals/<filename>')
+def get_image(filename):
+    rootdir = os.getcwd()
+    return send_from_directory(os.path.join(rootdir,['UPLOAD_FOLDER']), filename)    
+
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,
+                error
+), 'danger')
+
+
+
 
 
 def make_recipe_search_request(cuisine, exclude, intolerant):
@@ -512,6 +586,10 @@ def choose_rand_results(raw_results):
 
     return (results, remainder)
 
+
+
+
+
 def make_nutrition_info_request(ids):
     """Make bulk nutrition API call using ids of result recipes.
     Returns a response object."""
@@ -527,6 +605,16 @@ def make_nutrition_info_request(ids):
                             params=params
                             )
 
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     connect_to_db(app)
-    app.run(debug=True, host="0.0.0.0", port=8080)
+    app.run(debug=True, host="0.0.0.0", port=8070)

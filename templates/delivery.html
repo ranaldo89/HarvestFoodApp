@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Open Iconic -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" integrity="sha256-BJ/G+e+y7bQdrYkS2RBTyNfBHpA9IuGaPmf9htub5MQ=" crossorigin="anonymous">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Abel|Raleway" rel="stylesheet">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/static/styles.css">
+
+    <!-- chart.js -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+		<title>Track Deliveries</title>
+      <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="justify-content-center">
+            <a class="navbar-brand" href="/">H A R V E S T</a>
+        </div>
+        <span class="navbar-text">
+        Hello, {{ fname }}
+      </span>
+        <div class="collapse navbar-collapse justify-content-end">
+            <div class="navbar-nav">
+    
+                <a class="nav-item nav-link" href="/mymeals">My Meals</a>
+                <a class="nav-item nav-link" href="/newmeal">Add Meals</a>
+                <a class="btn btn-outline-danger" href="/signout">Sign Out</a>
+            </div>
+        </div>
+    </nav>
+
+    {% for p in plans %}
+    <div class="deliveryprogress">
+        <h2>Plan Starting {{p.start}} </h2>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+            {{p.order_status}}
+          </div>
+        </div>
+    </div>
+    {%endfor%}
+
+    
+  </body>
+</html>

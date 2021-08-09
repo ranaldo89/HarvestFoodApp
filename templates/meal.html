@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% block content %}
+<h1> Meal </h1>
+<div class="properties-container">
+    {% for meal in meals %}
+    <div class="card" id="p2-card">
+        <img src="{{ url_for('get_image',filename=meal.photo)}}" class="card-img-top" />
+        <div class="p2">
+            <h5 class="card-title">{{meals.foodName}}</h5>
+            <div class="bullet" id="bullet2">
+                {{meal.description}}
+            </div>
+            <div class="price">{{meals.description}}</div>
+        </div>
+        <a class="view-link" href="{{ url_for('get_property',propertyid=property.id) }}">View Property</a>
+    </div>
+
+    {% endfor %}
+
+
+
+</div>
+
+{% endblock %}

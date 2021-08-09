@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="justify-content-center">
+        <a class="navbar-brand" href="/">H A R V E S T</a>
+    </div>
+    <span class="navbar-text">
+    Hello, {{ fname }}
+  </span>
+    <div class="collapse navbar-collapse justify-content-end">
+        <div class="navbar-nav">
+
+            <a class="nav-item nav-link" href="/mymeals">My Meals</a>
+            <a class="btn btn-outline-danger" href="/newmeal">Add Meal</a>
+
+            <a class="btn btn-outline-danger" href="/signout">Sign Out</a>
+        </div>
+    </div>
+</nav>
+
+<div class="form-container">
+    <h1>Add New Meal </h1>
+    {% include 'flash_messages.html' %}
+    <form action="{{ url_for('newmeal') }}" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.title.label }} {{ form.title(class="form-control") }} Title
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form.prepTime.label }} {{ form.prepTime(class="form-control") }}
+            </div>
+            <div class="col">
+                {{ form.fat.label }} {{ form.fat(class="form-control")}}
+            </div>
+            <div class="col">
+                {{ form.protein.label }} {{ form.protein(class="form-control")}}
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ form.carbohydrates.label }} {{ form.carbohydrates(class="form-control") }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.calories.label }} {{ form.calories(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.image.label }} {{ form.image(class="form-control") }}
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Add Meals</button>
+
+    </form>
+
+</div>
+
+
+{% endblock %}
